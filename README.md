@@ -22,7 +22,7 @@ This project provides many interesting insights into the interconnections betwee
 # Files:
  - '''Data Modeling and Analysis.ipynb''': The main file in this project. In Main, we produce the main data cleaning, exploration, and analysis. All other files depend on the data prepared by this file. We present many functions to preform data analysis of the IMDB data at many levels.
  
-  - '''Model Training.ipynb''': The main file in this project. In Main, we produce the main data cleaning, exploration, and analysis. We also unify features generated in the other files to train a regression model
+  - '''Model Training.ipynb''': Here, we use the data processed in Data Modeling and Analysis.ipynb and features generated in our other notebooks to run a regression pipeline, predicting for 1) log(Return Rate) for a movie 2) IMDB score. The rationalies for these two metrics are discussed above.
 
  - '''Factors in Film Success.ipynb''': This file breaks down correlates to various factors behind film success as measued in revenue, return rate, imdb score, tmdb popularity, or number of facebook likes. It considers the median effect of factors such as genre, keywords, production company, and movie rating, providing a very detailed description of which values for factors are most correlated with different aspects of movie success.
 
