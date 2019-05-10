@@ -1,3 +1,5 @@
+Required Python Version: 2.7
+
 The files in this project perform multiple levels of analysis on the IMDB/TMDB datasets. 
 Source:
 IMDB Dataset: https://data.world/popculture/imdb-5000-movie-dataset
