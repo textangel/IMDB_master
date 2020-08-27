@@ -2,17 +2,24 @@ Required Python Version: 2.7
 
 We produce predictive models for movie profitability (log profit margin) and movie popularity (IMDB score) on the ~2500 movies that have buget of over USD1 million in the the [IMDB](https://data.world/popculture/imdb-5000-movie-dataset) and [TMDB](https://www.kaggle.com/tmdb/tmdb-movie-metadata) datasets.
 
-# Methodology
+### Methodology
+- Used lingustic, social-network, and tabular features
+- Performed RandomForest and SVM Regression, feature selection using LASSO
+- Target variable is `log profit margin = log( (revenue - cost) / revenue)`
+
 In terms of feature generation, the datasets are analyzed for trends and genres. Drivers and correlations of movie success are explored. Lingusistic features are gathered from the keywords provided in the data. Both language models trained on these keywords and publicly available language models are used to analyze the impact of keywords on movie success. Social-Network Features are generated from the cooperation network of actors defined by Actors who starred in the same movie. Other features are generated based on data description. 
 
-We train RandomForest and SVM Regression predictors for log profit margin and IMDB score, optimizing hyperparameters with GridSearch and performing feature selection using LASSO (that is, L1 regularization). RandomForest seems to perform better than SVM Regression in all cases.
+We train RandomForest and SVM Regression predictors for log profit margin and IMDB score, optimizing hyperparameters with GridSearch and performing feature selection using LASSO (that is, L1 regularization). RandomForest seems to perform better than SVM Regression in all cases. Note that we choose `log profit margin`, defined as `log( (revenue - cost) / revenue)` as our target variable as it is not correlated with other metrics such as `budget`, `profit`, and so on, and thus constitutes a non-trivial prediction problem.
 
-# Results
-We choose log return rate as our target variable as it is not correlated with other metrics budget, profit, and so on in a simple fashion, and thus is a difficult and interesting problem to predict for. We were able to describe well over half the variance of this feature (R2 .602) in a RandomForest model taking into account features such as Genres, Keywords, Actor PageRank, but no numerical financial or popularity information about budget, profit, facebook likes and so forth. Adding in the financial information we achieved R2 of 0.63.
-
+### Results
+ - 0.602 R2 using no financial features to predict for `log profit margin`
+ - 0.63 R2 using some financial features to predict for `log profit margin`
+ - 0.374 R2 predicting for IMDB score
+ 
+We were able to describe well over half the variance of this feature (R2 .602) in a RandomForest model taking into account features such as Genres, Keywords, Actor PageRank, but no numerical financial or popularity information about budget, profit, facebook likes and so forth. Adding in the financial information we achieved R2 of 0.63.
 We also ran the model to predict for IMDB score. Currently, without using any other popularity or finacial based features (only using features for PageRank, keywords, genre and so on) we achiece R2 of 0.374, and work is underway to improving the model.
 
-This project provides many interesting insights into the interconnections between movies, and is the foundational baseline for understanding what drives movie success.
+Analysis performed in this project provides many interesting insights into the interconnections between movies, and for understanding what drives movie success.
 
 # Files:
  - '''Data Modeling and Analysis.ipynb''': The main file in this project. In Main, we produce the main data cleaning, exploration, and analysis. All other files depend on the data prepared by this file. We present many functions to preform data analysis of the IMDB data at many levels.
