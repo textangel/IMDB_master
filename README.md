@@ -1,19 +1,14 @@
 Required Python Version: 2.7
 
-The files in this project perform multiple levels of analysis on the IMDB/TMDB datasets. 
-Source:
-IMDB Dataset: https://data.world/popculture/imdb-5000-movie-dataset
-TMDB Dataset: https://www.kaggle.com/tmdb/tmdb-movie-metadata
+We produce predictive models for movie profitability (log profit margin) and movie popularity (IMDB score) on the ~2500 movies that have buget of over USD1 million in the the [IMDB](https://data.world/popculture/imdb-5000-movie-dataset) and [TMDB](https://www.kaggle.com/tmdb/tmdb-movie-metadata) datasets.
 
-Each dataset contains 5000 movies, which when joined retain about ~4500 movies. We consider only movies that have buget of over USD1 million for the purpose of this analysis, retaining ~2500 movies.
+# Methodology
+In terms of feature generation, the datasets are analyzed for trends and genres. Drivers and correlations of movie success are explored. Lingusistic features are gathered from the keywords provided in the data. Both language models trained on these keywords and publicly available language models are used to analyze the impact of keywords on movie success. Social-Network Features are generated from the cooperation network of actors defined by Actors who starred in the same movie. Other features are generated based on data description. 
 
-The dataset is analyzed for trends and genres. Drivers and correlations of movie success are explored. Lingusistic features are gathered from the keywords provided in the data. Both language models trained on these keywords and publicly available language models are used to analyze the impact of keywords on movie success. Social-Network Features are generated from the cooperation network of actors defined by Actors who starred in the same movie. Other features are generated based on data description. We use many generated features (some latent, some numeric, some discrete categorical) to train several predictive models for log movie return rate and for IMDB score.
+We train RandomForest and SVM Regression predictors for log profit margin and IMDB score, optimizing hyperparameters with GridSearch and performing feature selection using LASSO (that is, L1 regularization). RandomForest seems to perform better than SVM Regression in all cases.
 
-Feature selection is preformed using LASSO on L1 loss, resulting in around half of the features selected for each model. Generated Categorical variables seem less likely to be selected as compared to numeric features; Some features selected are surprising.
-
-We try RandomForest and SVM Regression on each prediction problem, optimizing hyperparameters with GridSearch. RandomForest seems to perform better than SVM Regression in all cases.
-
-We choose log return rate as our target variable as it does not seem trivially correlated with budget, profit, and so on in a simple fashion, and thus is a difficult and interesting feture to predict for. We were able to describe well over half the variance of this feature (R2 .602) in a RandomForest model taking into account features such as Genres, Keywords, Actor PageRank, but no numerical financial or popularity information about budget, profit, facebook likes and so forth. Adding in the financial information we achieved R2 of 0.63.
+# Results
+We choose log return rate as our target variable as it is not correlated with other metrics budget, profit, and so on in a simple fashion, and thus is a difficult and interesting problem to predict for. We were able to describe well over half the variance of this feature (R2 .602) in a RandomForest model taking into account features such as Genres, Keywords, Actor PageRank, but no numerical financial or popularity information about budget, profit, facebook likes and so forth. Adding in the financial information we achieved R2 of 0.63.
 
 We also ran the model to predict for IMDB score. Currently, without using any other popularity or finacial based features (only using features for PageRank, keywords, genre and so on) we achiece R2 of 0.374, and work is underway to improving the model.
 
