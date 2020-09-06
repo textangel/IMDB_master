@@ -9,7 +9,9 @@ We produce predictive models for movie profitability (log profit margin) and mov
 
 In terms of feature generation, the datasets are analyzed for trends and genres. Drivers and correlations of movie success are explored. Lingusistic features are gathered from the keywords provided in the data. Both language models trained on these keywords and publicly available language models are used to analyze the impact of keywords on movie success. Social-Network Features are generated from the cooperation network of actors defined by Actors who starred in the same movie. Other features are generated based on data description. 
 
-We train RandomForest and SVM Regression predictors for log profit margin and IMDB score, optimizing hyperparameters with GridSearch and performing feature selection using LASSO (that is, L1 regularization). RandomForest seems to perform better than SVM Regression in all cases. Note that we choose `log profit margin`, defined as `log( (revenue - cost) / revenue)` as our target variable as it is not correlated with other metrics such as `budget`, `profit`, and so on, and thus constitutes a non-trivial prediction problem.
+We train RandomForest and SVM Regression predictors for log profit margin and IMDB score, optimizing hyperparameters with GridSearch and performing feature selection using LASSO (that is, L1 regularization). RandomForest seems to perform better than SVM Regression in all cases. Budget and other financial metrics are trivially correlated with profits; in order to do a non-trivial prediction we choose `log profit margin`, defined as `log( (revenue - cost) / revenue)`, which has only a 0.03 correlation with `log budget` as our target variable.
+
+
 
 ### Results
  - 0.602 R2 using no financial features to predict for `log profit margin`
