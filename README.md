@@ -12,7 +12,7 @@ We produce predictive models for movie profitability (log profit margin) and mov
 
 
 #### Model Training
-We train RandomForest and SVM Regression predictors for log profit margin and IMDB score, optimizing hyperparameters with GridSearch and performing feature selection using LASSO (that is, L1 regularization). RandomForest seems to perform better than SVM Regression in all cases. Note that we choose `log profit margin`, defined as `log( (revenue - cost) / revenue)` as our target variable as it is not correlated with other metrics such as `budget`, `profit`, and so on, and thus constitutes a non-trivial prediction problem.
+We train `sklearn` RandomForest and SVM Regression predictors for log profit margin and IMDB score, optimizing hyperparameters with GridSearch and performing feature selection using LASSO (that is, L1 regularization). RandomForest seems to perform better than SVM Regression in all cases. Note that we choose `log profit margin`, defined as `log( (revenue - cost) / revenue)` as our target variable as it is not correlated with other metrics such as `budget`, `profit`, and so on, and thus constitutes a non-trivial prediction problem.
 
 <img src="target_var_corr.png" alt="target variable corr" width="350"/>
 
