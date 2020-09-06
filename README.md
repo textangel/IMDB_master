@@ -1,14 +1,21 @@
 Required Python Version: 2.7
 
-After detailed analysis, we produce predictive models for movie profitability (log profit margin) and movie popularity (IMDB score) on the ~2500 movies that have buget of over USD1 million in the the [IMDB](https://data.world/popculture/imdb-5000-movie-dataset) and [TMDB](https://www.kaggle.com/tmdb/tmdb-movie-metadata) datasets, making use of lingustic word-vector deatures, graph-based social-network features, and other non-monetary movie features.
+We produce predictive models for movie profitability (log profit margin) and movie popularity (IMDB score) on the ~2500 movies that have buget of over USD1 million in the the [IMDB](https://data.world/popculture/imdb-5000-movie-dataset) and [TMDB](https://www.kaggle.com/tmdb/tmdb-movie-metadata) datasets, making use of lingustic word-vector deatures, graph-based social-network features, and other non-monetary movie features.
 
 ### Methodology
-- Used lingustic, social-network, and tabular features
-- Performed RandomForest and SVM Regression, feature selection using LASSO
+- Makes use of lingustic, social-network, and tabular features.
+- Performed `RandomForest` and `SVM` Regression, feature selection using `LASSO` and hyperparemters using `grid search`.
 - Target variable is `log profit margin = log( (revenue - cost) / revenue)`
 
-In terms of feature generation, the datasets are analyzed for trends and genres. Drivers and correlations of movie success are explored. Lingusistic features are gathered from the keywords provided in the data. Both language models trained on these keywords and publicly available language models are used to analyze the impact of keywords on movie success. Social-Network Features are generated from the cooperation network of actors defined by Actors who starred in the same movie. Other features are generated based on data description. 
+#### Feature Generation
+- Using movie keywords, trained `word embeddings` from scratch and represented each movie as a `tf-idf` weighting of its keywords
+- Using actor-actor graph, computed `PageRank` of actors to serve as actor popularity feature.
+- Used PCA to reduce dimensions of above and other categorical features.
 
+The datasets are analyzed for trends and genres, and drivers and correlations of movie success are explored to motivate feature generation.
+**Lingusistic features** are extracted from movie keywords and movie descriptions using a Named Entity Recognizer. `Word embeddings` for these keywords are trained form scratch, and each movie is represented as a `tf-idf` interpolation of its word embeddings. Social-Network features are generated from the cooperation network of actors defined by Actors who starred in the same movie. We perform `PCA` dimensionality reduction on all linguistic features, and perform one-hot-encoding on other categorical features.
+
+#### Model Training
 We train RandomForest and SVM Regression predictors for log profit margin and IMDB score, optimizing hyperparameters with GridSearch and performing feature selection using LASSO (that is, L1 regularization). RandomForest seems to perform better than SVM Regression in all cases. Note that we choose `log profit margin`, defined as `log( (revenue - cost) / revenue)` as our target variable as it is not correlated with other metrics such as `budget`, `profit`, and so on, and thus constitutes a non-trivial prediction problem.
 
 <img src="target_var_corr.png" alt="target variable corr" width="350"/>
