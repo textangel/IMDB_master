@@ -1,6 +1,6 @@
 Required Python Version: 2.7
 
-We produce predictive models for movie profitability (log profit margin) and movie popularity (IMDB score) on the ~2500 movies that have buget of over USD1 million in the the [IMDB](https://data.world/popculture/imdb-5000-movie-dataset) and [TMDB](https://www.kaggle.com/tmdb/tmdb-movie-metadata) datasets.
+After detailed analysis, we produce predictive models for movie profitability (log profit margin) and movie popularity (IMDB score) on the ~2500 movies that have buget of over USD1 million in the the [IMDB](https://data.world/popculture/imdb-5000-movie-dataset) and [TMDB](https://www.kaggle.com/tmdb/tmdb-movie-metadata) datasets, making use of lingustic word-vector deatures, graph-based social-network features, and other non-monetary movie features.
 
 ### Methodology
 - Used lingustic, social-network, and tabular features
