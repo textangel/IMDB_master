@@ -8,7 +8,7 @@ We produce predictive models for movie profitability (log profit margin) and mov
 #### Feature Generation
 - Using movie keywords, trained `word embeddings` from scratch and represented each movie as a `tf-idf` weighting of its keywords
 - Using actor-actor graph, computed `PageRank` of actors to serve as actor popularity feature.
-- Used PCA to reduce dimensions of above and other categorical features.
+- Used `PCA` to reduce dimensions of above and other categorical features.
 
 The datasets are analyzed for trends and genres, and drivers and correlations of movie success are explored to motivate feature generation.
 **Lingusistic features** are extracted from movie keywords and movie descriptions using a Named Entity Recognizer. `Word embeddings` for these keywords are trained form scratch, and each movie is represented as a `tf-idf` interpolation of its word embeddings. Social-Network features are generated from the cooperation network of actors defined by Actors who starred in the same movie. We perform `PCA` dimensionality reduction on all linguistic features, and perform one-hot-encoding on other categorical features.
